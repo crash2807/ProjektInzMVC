@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="s17041Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="IdEvent" />
+    </Key>
+    <Property Name="IdEvent" Type="int" Nullable="false" />
+    <Property Name="EventName" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="IdUser" Type="int" Nullable="false" />
+    <Property Name="EventDate" Type="datetime" Nullable="false" />
+    <Property Name="EventPlace" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="EventRelation">
+    <Key>
+      <PropertyRef Name="IdEventRelation" />
+    </Key>
+    <Property Name="IdEvent" Type="int" Nullable="false" />
+    <Property Name="IdRelation" Type="int" Nullable="false" />
+    <Property Name="IdEventRelation" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Forum_Event">
+    <Key>
+      <PropertyRef Name="IdEventRelation" />
+      <PropertyRef Name="IdEvent" />
+      <PropertyRef Name="Date" />
+    </Key>
+    <Property Name="IdEventRelation" Type="int" Nullable="false" />
+    <Property Name="IdEvent" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gift">
+    <Key>
+      <PropertyRef Name="IdGift" />
+    </Key>
+    <Property Name="IdGift" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUser" Type="int" Nullable="false" />
+    <Property Name="Gift" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Size" Type="char" MaxLength="3" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="30" />
+    <Property Name="Color" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Photo" Type="image" />
+  </EntityType>
+  <EntityType Name="Gift_Relation_Event">
+    <Key>
+      <PropertyRef Name="IdGift" />
+      <PropertyRef Name="IdRelation" />
+      <PropertyRef Name="IdEvent" />
+    </Key>
+    <Property Name="IdGift" Type="int" Nullable="false" />
+    <Property Name="IdRelation" Type="int" Nullable="false" />
+    <Property Name="IdEvent" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hobby">
+    <Key>
+      <PropertyRef Name="IdHobby" />
+    </Key>
+    <Property Name="IdHobby" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HobbyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Relation">
+    <Key>
+      <PropertyRef Name="IdRelation" />
+    </Key>
+    <Property Name="IdRelation" Type="int" Nullable="false" />
+    <Property Name="IdUser" Type="int" Nullable="false" />
+    <Property Name="IdUser_2" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="Birthday" Type="date" Nullable="false" />
+    <Property Name="Avatar" Type="image" />
+  </EntityType>
+  <EntityType Name="User_Hobby">
+    <Key>
+      <PropertyRef Name="IdUser" />
+      <PropertyRef Name="IdHobby" />
+    </Key>
+    <Property Name="IdUser" Type="int" Nullable="false" />
+    <Property Name="IdHobby" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="Okazja_Uzytkownik">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Event" Type="Self.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OkazjaZnajomi_Znajomosc">
+    <End Role="Relation" Type="Self.Relation" Multiplicity="1" />
+    <End Role="EventRelation" Type="Self.EventRelation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Relation">
+        <PropertyRef Name="IdRelation" />
+      </Principal>
+      <Dependent Role="EventRelation">
+        <PropertyRef Name="IdRelation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Prezent_Uzytkownik">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Gift" Type="Self.Gift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Gift">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Table_5_Okazja">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
+    <End Role="EventRelation" Type="Self.EventRelation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="IdEvent" />
+      </Principal>
+      <Dependent Role="EventRelation">
+        <PropertyRef Name="IdEvent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Table_9_Okazja">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
+    <End Role="Gift_Relation_Event" Type="Self.Gift_Relation_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="IdEvent" />
+      </Principal>
+      <Dependent Role="Gift_Relation_Event">
+        <PropertyRef Name="IdEvent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Table_9_Prezent">
+    <End Role="Gift" Type="Self.Gift" Multiplicity="1" />
+    <End Role="Gift_Relation_Event" Type="Self.Gift_Relation_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gift">
+        <PropertyRef Name="IdGift" />
+      </Principal>
+      <Dependent Role="Gift_Relation_Event">
+        <PropertyRef Name="IdGift" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Table_9_Znajomosc">
+    <End Role="Relation" Type="Self.Relation" Multiplicity="1" />
+    <End Role="Gift_Relation_Event" Type="Self.Gift_Relation_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Relation">
+        <PropertyRef Name="IdRelation" />
+      </Principal>
+      <Dependent Role="Gift_Relation_Event">
+        <PropertyRef Name="IdRelation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Wpis_Okazja">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
+    <End Role="Forum_Event" Type="Self.Forum_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="IdEvent" />
+      </Principal>
+      <Dependent Role="Forum_Event">
+        <PropertyRef Name="IdEvent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Wpis_OkazjaZnajomi">
+    <End Role="EventRelation" Type="Self.EventRelation" Multiplicity="1" />
+    <End Role="Forum_Event" Type="Self.Forum_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventRelation">
+        <PropertyRef Name="IdEventRelation" />
+      </Principal>
+      <Dependent Role="Forum_Event">
+        <PropertyRef Name="IdEventRelation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Znajomosc_Uzytkownik">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Relation" Type="Self.Relation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Relation">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Znajomosc_Uzytkownik_2">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Relation" Type="Self.Relation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Relation">
+        <PropertyRef Name="IdUser_2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="s17041ModelStoreContainer">
+    <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventRelation" EntityType="Self.EventRelation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Forum_Event" EntityType="Self.Forum_Event" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gift" EntityType="Self.Gift" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gift_Relation_Event" EntityType="Self.Gift_Relation_Event" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hobby" EntityType="Self.Hobby" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Relation" EntityType="Self.Relation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Hobby" EntityType="Self.User_Hobby" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="Okazja_Uzytkownik" Association="Self.Okazja_Uzytkownik">
+      <End Role="User" EntitySet="User" />
+      <End Role="Event" EntitySet="Event" />
+    </AssociationSet>
+    <AssociationSet Name="OkazjaZnajomi_Znajomosc" Association="Self.OkazjaZnajomi_Znajomosc">
+      <End Role="Relation" EntitySet="Relation" />
+      <End Role="EventRelation" EntitySet="EventRelation" />
+    </AssociationSet>
+    <AssociationSet Name="Prezent_Uzytkownik" Association="Self.Prezent_Uzytkownik">
+      <End Role="User" EntitySet="User" />
+      <End Role="Gift" EntitySet="Gift" />
+    </AssociationSet>
+    <AssociationSet Name="Table_5_Okazja" Association="Self.Table_5_Okazja">
+      <End Role="Event" EntitySet="Event" />
+      <End Role="EventRelation" EntitySet="EventRelation" />
+    </AssociationSet>
+    <AssociationSet Name="Table_9_Okazja" Association="Self.Table_9_Okazja">
+      <End Role="Event" EntitySet="Event" />
+      <End Role="Gift_Relation_Event" EntitySet="Gift_Relation_Event" />
+    </AssociationSet>
+    <AssociationSet Name="Table_9_Prezent" Association="Self.Table_9_Prezent">
+      <End Role="Gift" EntitySet="Gift" />
+      <End Role="Gift_Relation_Event" EntitySet="Gift_Relation_Event" />
+    </AssociationSet>
+    <AssociationSet Name="Table_9_Znajomosc" Association="Self.Table_9_Znajomosc">
+      <End Role="Relation" EntitySet="Relation" />
+      <End Role="Gift_Relation_Event" EntitySet="Gift_Relation_Event" />
+    </AssociationSet>
+    <AssociationSet Name="Wpis_Okazja" Association="Self.Wpis_Okazja">
+      <End Role="Event" EntitySet="Event" />
+      <End Role="Forum_Event" EntitySet="Forum_Event" />
+    </AssociationSet>
+    <AssociationSet Name="Wpis_OkazjaZnajomi" Association="Self.Wpis_OkazjaZnajomi">
+      <End Role="EventRelation" EntitySet="EventRelation" />
+      <End Role="Forum_Event" EntitySet="Forum_Event" />
+    </AssociationSet>
+    <AssociationSet Name="Znajomosc_Uzytkownik" Association="Self.Znajomosc_Uzytkownik">
+      <End Role="User" EntitySet="User" />
+      <End Role="Relation" EntitySet="Relation" />
+    </AssociationSet>
+    <AssociationSet Name="Znajomosc_Uzytkownik_2" Association="Self.Znajomosc_Uzytkownik_2">
+      <End Role="User" EntitySet="User" />
+      <End Role="Relation" EntitySet="Relation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

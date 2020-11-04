@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="s17041ModelStoreContainer" CdmEntityContainer="s17041Entities">
+    <EntitySetMapping Name="Event">
+      <EntityTypeMapping TypeName="s17041Model.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="IdEvent" ColumnName="IdEvent" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventPlace" ColumnName="EventPlace" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventRelation">
+      <EntityTypeMapping TypeName="s17041Model.EventRelation">
+        <MappingFragment StoreEntitySet="EventRelation">
+          <ScalarProperty Name="IdEvent" ColumnName="IdEvent" />
+          <ScalarProperty Name="IdRelation" ColumnName="IdRelation" />
+          <ScalarProperty Name="IdEventRelation" ColumnName="IdEventRelation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Forum_Event">
+      <EntityTypeMapping TypeName="s17041Model.Forum_Event">
+        <MappingFragment StoreEntitySet="Forum_Event">
+          <ScalarProperty Name="IdEventRelation" ColumnName="IdEventRelation" />
+          <ScalarProperty Name="IdEvent" ColumnName="IdEvent" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gift">
+      <EntityTypeMapping TypeName="s17041Model.Gift">
+        <MappingFragment StoreEntitySet="Gift">
+          <ScalarProperty Name="IdGift" ColumnName="IdGift" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="Gift1" ColumnName="Gift" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gift_Relation_Event">
+      <EntityTypeMapping TypeName="s17041Model.Gift_Relation_Event">
+        <MappingFragment StoreEntitySet="Gift_Relation_Event">
+          <ScalarProperty Name="IdGift" ColumnName="IdGift" />
+          <ScalarProperty Name="IdRelation" ColumnName="IdRelation" />
+          <ScalarProperty Name="IdEvent" ColumnName="IdEvent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hobby">
+      <EntityTypeMapping TypeName="s17041Model.Hobby">
+        <MappingFragment StoreEntitySet="Hobby">
+          <ScalarProperty Name="IdHobby" ColumnName="IdHobby" />
+          <ScalarProperty Name="HobbyName" ColumnName="HobbyName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Relation">
+      <EntityTypeMapping TypeName="s17041Model.Relation">
+        <MappingFragment StoreEntitySet="Relation">
+          <ScalarProperty Name="IdRelation" ColumnName="IdRelation" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="IdUser_2" ColumnName="IdUser_2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="s17041Model.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Hobby">
+      <EntityTypeMapping TypeName="s17041Model.User_Hobby">
+        <MappingFragment StoreEntitySet="User_Hobby">
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="IdHobby" ColumnName="IdHobby" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
